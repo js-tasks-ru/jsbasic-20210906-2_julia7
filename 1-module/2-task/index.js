@@ -14,7 +14,7 @@ function isValid(name) {
   if (typeof name == 'string') {
     return (name.length >= 4 && !!name && name.indexOf(' ') == -1)
   }
-  return boo;
+  return false;
 }
 
 function sayHello() {
