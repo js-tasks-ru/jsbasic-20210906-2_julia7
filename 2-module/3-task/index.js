@@ -1,9 +1,9 @@
 let calculator = {
   a: 0,
   b: 0,
-  read() {
-    this.a = +prompt('Print first number', '')
-    this.b = +prompt('Print second number', '')
+  read(a, b) {
+    this.a = a
+    this.b = b
   },
   sum() {
     return this.a + this.b
@@ -15,3 +15,5 @@ let calculator = {
 
 // НЕ УДАЛЯТЬ СТРОКУ, НУЖНА ДЛЯ ПРОВЕРКИ
 window.calculator = calculator; // делает ваш калькулятор доступным глобально
+
+
