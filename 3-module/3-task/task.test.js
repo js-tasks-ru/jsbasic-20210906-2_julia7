@@ -4,11 +4,11 @@ describe('3-module-3-task', () => {
   });
 
   it('должна преобразовать \'background-color\'', () => {
-    expect(camelize('background-color')).toBe('backgroundColor');
+    expect(camelize('background-color')).toBe('BackgroundColor');
   });
 
   it('должна преобразовать \'list-style-image\' ', () => {
-    expect(camelize('list-style-image')).toBe('listStyleImage');
+    expect(camelize('list-style-image')).toBe('ListStyleImage');
   });
 
   it('должна преобразовать \'-webkit-transition\'', () => {
