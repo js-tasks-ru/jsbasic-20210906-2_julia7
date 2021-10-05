@@ -1,13 +1,14 @@
-const arrowRight = document.querySelector('.carousel__arrow_right');
-const arrowLeft = document.querySelector('.carousel__arrow_left');
-let maxlength = document.querySelectorAll('.carousel__slide').length;
-const carouselInner = document.querySelector('.carousel__inner');
-let widthCarousel = carouselInner.offsetWidth;
-let count = 0;
-let tranformLength = widthCarousel;
-arrowLeft.style.display = 'none';
 
 function initCarousel() {
+  const arrowRight = document.querySelector('.carousel__arrow_right');
+  const arrowLeft = document.querySelector('.carousel__arrow_left');
+  let maxlength = document.querySelectorAll('.carousel__slide').length;
+  const carouselInner = document.querySelector('.carousel__inner');
+  let widthCarousel = carouselInner.offsetWidth;
+  let count = 0;
+  let tranformLength = widthCarousel;
+  arrowLeft.style.display = 'none';
+
   arrowRight.addEventListener('click', () => {
     if (count == 0) {
       if(tranformLength == 0) tranformLength = widthCarousel;
