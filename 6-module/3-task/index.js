@@ -19,8 +19,7 @@ export default class Carousel {
         </button>
       </div>
     </div>
-      `
-    });
+      `});
 
     this.carousel = `
     <div class="carousel">
@@ -33,7 +32,7 @@ export default class Carousel {
       <div class="carousel__inner">
         ${this.carouselInner}
       </div>
-    </dis>
+    </div>
     `
     this.elem = createElement(this.carousel)
     this.transformLength = this.widthCarousel
@@ -62,8 +61,17 @@ export default class Carousel {
       this.innerContainer.style.transform = `translateX(-${this.transformLength}px)`
     })
 
-    this.btnPlus.forEach(slide => {
-      slide.addEventListener('click', this.btnClick)
+    Array.from(this.elem.querySelectorAll('.carousel__button')).forEach(btn => {
+      btn.addEventListener('click', (event) => {
+        const loc = event.target;
+
+        const addProduct = new CustomEvent("product-add", {
+          detail: loc.closest('div[data-id]').getAttribute('data-id'),
+          bubbles: true
+        });
+
+        this.elem.dispatchEvent(addProduct)
+      })
     })
   }
 
@@ -82,21 +90,4 @@ export default class Carousel {
   get widthCarousel() {
     return this.innerContainer.offsetWidth
   }
-
-  get btnPlus() {
-    return this.elem.querySelectorAll('.carousel__button')
-  }
-
-  btnClick = () => {
-    console.log(this)
-    const addProduct = new CustomEvent('product-add', {
-      detail: '',
-      bubbles: true
-    })
-
-    this.btnPlus.forEach(btn => {
-      btn.dispatchEvent(addProduct)
-    })
-  }
-
 }
