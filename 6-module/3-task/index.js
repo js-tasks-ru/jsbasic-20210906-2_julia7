@@ -36,6 +36,7 @@ export default class Carousel {
     `
     this.elem = createElement(this.carousel)
     this.transformLength = this.widthCarousel
+    this.arrowLeft.style.display = 'none'
 
     this.arrowRight.addEventListener('click', () => {
       if (this.count == 0) {
@@ -63,10 +64,10 @@ export default class Carousel {
 
     Array.from(this.elem.querySelectorAll('.carousel__button')).forEach(btn => {
       btn.addEventListener('click', (event) => {
-        const loc = event.target;
+        const target = event.target;
 
         const addProduct = new CustomEvent("product-add", {
-          detail: loc.closest('div[data-id]').getAttribute('data-id'),
+          detail: target.closest('div[data-id]').dataset.id,
           bubbles: true
         });
 
@@ -79,9 +80,7 @@ export default class Carousel {
     return this.elem.querySelector('.carousel__arrow_right')
   }
   get arrowLeft() {
-    const left = this.elem.querySelector('.carousel__arrow_left')
-    left.style.display = 'none'
-    return left
+    return this.elem.querySelector('.carousel__arrow_left')
   }
   get innerContainer() {
     return this.elem.querySelector('.carousel__inner')
