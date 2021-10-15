@@ -24,7 +24,12 @@ export default class StepSlider {
     this.stepSlider = this.stepsSlider.querySelectorAll('span')
 
     this.elem.addEventListener('click', (event) => {
-      this.clickSlider(event)
+
+      this.stepSlider.forEach(step => {
+        step.classList.remove('slider__step-active')
+      })
+
+      this.stopPointer(event)
     })
 
     this.sliderThumb.style.left = `${value / this.segments * 100}%`
@@ -42,6 +47,7 @@ export default class StepSlider {
       this.elem.addEventListener('pointermove', this.movePointer)
 
       this.elem.addEventListener('pointerup', (event) => {
+        this.elem.classList.remove('slider_dragging')
         this.elem.removeEventListener('pointermove',this.movePointer)
         this.stopPointer(event)
       }, {once: true})
@@ -56,23 +62,20 @@ export default class StepSlider {
     this.sliderProgress.style.width = `${moveLocation / this.segments * 100}%`
   }
 
-  stopPointer = (event) => {
-    this.elem.classList.remove('slider_dragging')
-    let stopLocation = Math.round(((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth) * this.segments);
-    this.elem.querySelector('.slider__value').innerHTML = Math.round(this.stopLocation)
-    this.sliderThumb.style.left = `${stopLocation / this.segments * 100}%`
-    this.sliderProgress.style.width = `${stopLocation / this.segments * 100}%`
+  // stopPointer = (event) => {
 
-    this.elem.dispatchEvent(new CustomEvent('slider-change', {
-      detail: stopLocation,
-      bubbles: true
-    }))
-  }
+  //   let stopLocation = Math.round(((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth) * this.segments);
+  //   this.elem.querySelector('.slider__value').innerHTML = Math.round(this.stopLocation)
+  //   this.sliderThumb.style.left = `${stopLocation / this.segments * 100}%`
+  //   this.sliderProgress.style.width = `${stopLocation / this.segments * 100}%`
 
-  clickSlider(event) {
-    this.stepSlider.forEach(step => {
-      step.classList.remove('slider__step-active')
-    })
+  //   this.elem.dispatchEvent(new CustomEvent('slider-change', {
+  //     detail: stopLocation,
+  //     bubbles: true
+  //   }))
+  // }
+
+  stopPointer(event) {
     let locationClick = Math.round(((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth) * this.segments);
     this.elem.querySelector('.slider__value').innerHTML = locationClick
     this.stepSlider[locationClick].classList.add('slider__step-active')
