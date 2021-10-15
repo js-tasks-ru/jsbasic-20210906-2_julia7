@@ -62,26 +62,12 @@ export default class StepSlider {
     this.sliderProgress.style.width = `${moveLocation / this.segments * 100}%`
   }
 
-  // stopPointer = (event) => {
-
-  //   let stopLocation = Math.round(((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth) * this.segments);
-  //   this.elem.querySelector('.slider__value').innerHTML = Math.round(this.stopLocation)
-  //   this.sliderThumb.style.left = `${stopLocation / this.segments * 100}%`
-  //   this.sliderProgress.style.width = `${stopLocation / this.segments * 100}%`
-
-  //   this.elem.dispatchEvent(new CustomEvent('slider-change', {
-  //     detail: stopLocation,
-  //     bubbles: true
-  //   }))
-  // }
-
   stopPointer(event) {
     let locationClick = Math.round(((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth) * this.segments);
     this.elem.querySelector('.slider__value').innerHTML = locationClick
     this.stepSlider[locationClick].classList.add('slider__step-active')
     this.sliderThumb.style.left = `${locationClick / this.segments * 100}%`
     this.sliderProgress.style.width = `${locationClick / this.segments * 100}%`
-
 
     this.elem.dispatchEvent(new CustomEvent('slider-change', {
       detail: locationClick,
