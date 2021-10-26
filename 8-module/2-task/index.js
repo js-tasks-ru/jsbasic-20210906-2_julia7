@@ -11,12 +11,10 @@ export default class ProductGrid {
         </div>
       </div>`
     )
-
     this.createProductsCard()
   }
 
   createProductsCard () {
-
     let productInner = this.elem.querySelector('.products-grid__inner')
     productInner.innerHTML = ''
 
