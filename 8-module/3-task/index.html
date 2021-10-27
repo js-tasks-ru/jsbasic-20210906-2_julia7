@@ -58,6 +58,7 @@
     import CartIcon from '../1-task/index.js';
 
     let cartIcon = new CartIcon();
+    console.log(cartIcon)
     let cartIconHolder = document.querySelector('[data-cart-icon-holder]');
     cartIconHolder.append(cartIcon.elem);
 
@@ -89,6 +90,7 @@
     ]
 
     let cart = new Cart(cartIcon);
+    console.log(cart)
 
     document.addEventListener('click', (event) => {
       let button = event.target.closest('.button');
@@ -97,6 +99,7 @@
       }
 
       if (button.dataset.addProductId) {
+        console.log('product')
         let addProductId = button.dataset.addProductId;
         let productToAdd = products.find((product) => product.id === addProductId);
         cart.addProduct(productToAdd);

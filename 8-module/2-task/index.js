@@ -5,19 +5,18 @@ export default class ProductGrid {
   constructor(products) {
     this.products = products;
     this.filters = {};
-    this.render();
+    this.elem = createElement(
+      `<div class="products-grid">
+        <div class="products-grid__inner">
+        </div>
+      </div>`
+    )
+    this.createProductsCard()
   }
 
-  render() {
-    this.elem = createElement(`<div class="products-grid">
-      <div class="products-grid__inner"></div>
-    </div>`);
-
-    this.renderContent();
-  }
-
-  renderContent() {
-    this.sub('inner').innerHTML = '';
+  createProductsCard () {
+    let productInner = this.elem.querySelector('.products-grid__inner')
+    productInner.innerHTML = ''
 
     for (let product of this.products) {
       if (this.filters.noNuts && product.nuts) {continue;}
@@ -32,18 +31,13 @@ export default class ProductGrid {
         continue;
       }
 
-      let card = new ProductCard(product);
-      this.sub("inner").append(card.elem);
+      let card = new ProductCard(product)
+      productInner.append(card.elem)
     }
   }
 
   updateFilter(filters) {
-    Object.assign(this.filters, filters);
-    this.renderContent();
+    Object.assign(this.filters, filters)
+    this.createProductsCard()
   }
-
-  sub(ref) {
-    return this.elem.querySelector(`.products-grid__${ref}`);
-  }
-
 }
